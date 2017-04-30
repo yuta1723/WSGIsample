@@ -2,9 +2,10 @@ from wsgiref import simple_server
 
 def application(env, res):
     status = "200 OK"
-    header =  [("Content-type", "text/plain")]
+    body = "Hello wsgi application\n"
+    header =  [("Content-type", "text/plain"),("Content-Length",str(len(body)))]
     res(status,header)
-    return ["Hello wsgi application\n"]
+    return [body]
 
 if __name__ == "__main__":
     sv = simple_server.make_server("", 8080, application) #host , port , application
