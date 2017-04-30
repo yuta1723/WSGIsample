@@ -3,7 +3,8 @@ from wsgiref import simple_server
 
 def application(env, res):
     status = "200 OK"
-    body = makeString()
+    body = env['QUERY_STRING']
+    #body = makeString()
     header =  [("Content-type", "text/html;charset=UTF-8"),("Content-Length",str(len(body)))]
     res(status,header)
     return [body]
