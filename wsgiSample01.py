@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from wsgiref import simple_server
+from cgi import parse_qs
 
 def application(env, res):
     status = "200 OK"
-    body = env['QUERY_STRING']
+    get_info = parse_qs(env['QUERY_STRING'])
+    body = 'year=' + get_info['year'][0] + '<br>'
+    body += 'month=' + get_info['month'][0] + '<br>'
+    body += 'day=' + get_info['day'][0] + '<br>'
     #body = makeString()
     header =  [("Content-type", "text/html;charset=UTF-8"),("Content-Length",str(len(body)))]
     res(status,header)
